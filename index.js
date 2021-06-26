@@ -4,6 +4,7 @@ const Discord = require("discord.js");
 const fs = require('fs');
 const commandHandler = require('./commandHandler.js');
 
+
 require("dotenv").config();
 
 const client = new Discord.Client();
@@ -13,6 +14,7 @@ client.login(process.env.BOTTOKEN);
 client.on('ready', readied);
 
 client.commands = new Discord.Collection();
+client.defaultEmbed = require("./defaultEmbed.js");
 
 const folderName = "commands";
 const folder = fs.readdirSync(folderName).filter(file => file.endsWith(".js"));

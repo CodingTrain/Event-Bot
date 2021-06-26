@@ -9,11 +9,15 @@ module.exports = {
 
         const messageNoPrefix = msg.content.slice(1);
         const tokens = messageNoPrefix.split(/ +/);
-        const commandName = tokens[0];
+        const commandName = tokens.shift();
+        msg.tokens = tokens;
 
         if(!client.commands.has(commandName))return;
 
         const command = client.commands.get(commandName);
+
+        if(command.arguments && (tokens.length < command.arguments))return;
+
         command.execute(msg);
 
     
